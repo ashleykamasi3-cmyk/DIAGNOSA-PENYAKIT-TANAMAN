@@ -3,162 +3,217 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SPK Diagnosis - Single Page App</title>
+<title>SPK Diagnosis</title>
 <style>
-    body {
-        margin: 0;
-        font-family: 'Times New Roman', serif;
-        background-color: #f7f1fa;
-        line-height: 1.5;
-        display: flex;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-        width: 260px;
-        background-color: #c9addb;
-        height: 100vh;
-        padding-top: 40px;
-        position: fixed;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    }
-    .sidebar a {
-        display: block;
-        padding: 18px;
-        text-decoration: none;
-        font-size: 20px;
-        color: #fff;
-        text-align: center;
-        cursor: pointer;
-    }
-    .sidebar a:hover {
-        background-color: #b38bc8;
-    }
-
-    /* CONTENT */
-    .content {
-        margin-left: 260px;
-        padding: 40px;
-        width: calc(100% - 260px);
-    }
-
-    h1 {
-        font-size: 30px;
-        text-align: center;
-    }
-
-    .section {
-        display: none;
-    }
-
-    .active {
-        display: block;
-    }
-
-    .card {
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        font-size: 24px;
-        text-align: center;
-    }
-
-    select, button {
-        font-size: 20px;
-        padding: 10px;
-        margin-top: 15px;
-        width: 100%;
-    }
+ body {
+   font-family: 'Times New Roman', serif;
+   background: #f3e9ff;
+   margin: 0;
+   line-height: 1.5;
+ }
+ .sidebar {
+   width: 260px;
+   background: #c7adeb;
+   height: 100vh;
+   position: fixed;
+   top: 0;
+   left: 0;
+   padding: 20px;
+ }
+ .sidebar a {
+   display: block;
+   margin: 15px 0;
+   text-decoration: none;
+   font-size: 22px;
+   color: #3f2b63;
+   font-weight: bold;
+ }
+ .content {
+   margin-left: 280px;
+   padding: 40px;
+ }
+ .page { display: none; }
+ .active { display: block; }
+ h1 { font-size: 40px; text-align: center; }
+ h2 { text-align: center; font-size: 24px; }
+ .card {
+   background: #ffffffcc;
+   padding: 20px;
+   border-radius: 12px;
+   box-shadow: 0 0 10px #bfa7d8;
+   max-width: 700px;
+   margin: auto;
+ }
+ select {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   font-size: 18px;
+   font-family: 'Times New Roman';
+ }
+ .result {
+   margin-top: 20px;
+   padding: 20px;
+   background: #e8d9ff;
+   border-radius: 10px;
+   font-size: 22px;
+   text-align: center;
+ }
 </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <a onclick="showPage('home')">Home</a>
-    <a onclick="showPage('info')">Info</a>
-    <a onclick="showPage('spk')">SPK</a>
-    <a onclick="showPage('about')">About</a>
+ <a href="#" onclick="showPage('home')">Home</a>
+ <a href="#" onclick="showPage('info')">Info</a>
+ <a href="#" onclick="showPage('spk')">SPK</a>
 </div>
 
 <div class="content">
+ <!-- HOME -->
+ <div id="home" class="page active">
+   <h1>WELCOME TO OUR WEBSITE</h1>
+   <div class="card">
+     <h2>UNIVERSITAS SAM RATULANGI MANADO<br>
+     FAKULTAS PERTANIAN<br>
+     PRODI AGROTEKNOLOGI<br>
+     ANGKATAN 2025<br><br>
+     Tugas Mata Kuliah Teknologi Informasi<br>
+     Create By Kelompok 1</h2>
+   </div>
+ </div>
 
-    <!-- HOME PAGE -->
-    <div id="home" class="section active">
-        <h1>WELCOME TO OUR WEBSITE</h1>
-        <div class="card">
-            UNIVERSITAS SAM RATULANGI MANADO<br>
-            FAKULTAS PERTANIAN<br>
-            PRODI AGROTEKNOLOGI<br>
-            ANGKATAN 2025<br><br>
-            Tugas Mata Kuliah Teknologi Informasi<br>
-            Create By Kelompok 1
-        </div>
-    </div>
+ <!-- INFO -->
+ <div id="info" class="page">
+   <h1>WELCOME TO OUR WEBSITE</h1>
+   <div class="card">
+     <h2>
+       Nama Mahasiswa<br><br>
+       Ashley Kamasi 250311080004<br>
+       Al Zahra Trianoviyanti 250311080001<br>
+       Helena Lumentut 250311080002<br>
+       Pricilia Pongoh 250311080003<br>
+       Chelsea Mokodompis 250311080005
+     </h2>
+   </div>
+ </div>
 
-    <!-- INFO PAGE -->
-    <div id="info" class="section">
-        <h1>INFO</h1>
-        <div class="card">
-            Ashley Kamasi 250311080004 <br>
-            Al Zahra Trianoviyanti 250311080001 <br>
-            Helena Lumentut 250311080002 <br>
-            Pricilia Pongoh 250311080003 <br>
-            Chelsea Mokodompis 250311080005
-        </div>
-    </div>
+ <!-- SPK -->
+ <div id="spk" class="page">
+   <h1>WELCOME TO OUR WEBSITE</h1>
+   <div class="card">
+     <h2>SISTEM PENDUKUNG KEPUTUSAN DIAGNOSIS PENYAKIT</h2>
 
-    <!-- SPK PAGE -->
-    <div id="spk" class="section">
-        <h1>Sistem Penunjang Keputusan Diagnosis Penyakit</h1>
-        <div class="card">
-            <label>Pilih Gejala 1</label>
-            <select id="g1" onchange="filterG2()">
-                <option value="">-- pilih --</option>
-                <option value="1">Daun muda berwarna kuning pucat sejak awal pertumbuhan.</option>
-                <option value="2">Muncul bintik-bintik kecil berwarna coklat kemerahan pada permukaan daun.</option>
-                <option value="3">Biji tampak keriput dan tidak terisi penuh.</option>
-                <option value="4">Bercak kecil berbentuk oval berwarna coklat pada daun.</option>
-                <option value="5">Garis-garis kuning pucat memanjang sejajar tulang daun</option>
-                <option value="6">Daun menguning lalu perlahan rontok.</option>
-                <option value="7">Daun menguning lalu rontok secara bertahap.</option>
-                <option value="8">Ujung ranting atau pucuk mengering dan berwarna kecokelatan.</option>
-                <option value="9">Permukaan daun tertutup lapisan hitam seperti jelaga.</option>
-                <option value="10">Bercak tembus cahaya</option>
-            </select>
+     <select id="g1" onchange="updateGejala(1)">
+       <option value="">-- Pilih Gejala 1 --</option>
+     </select>
+     <select id="g2" onchange="updateGejala(2)">
+       <option value="">-- Pilih Gejala 2 --</option>
+     </select>
+     <select id="g3" onchange="updateGejala(3)">
+       <option value="">-- Pilih Gejala 3 --</option>
+     </select>
+     <select id="g4" onchange="updateGejala(4)">
+       <option value="">-- Pilih Gejala 4 --</option>
+     </select>
+     <select id="g5" onchange="updateGejala(5)">
+       <option value="">-- Pilih Gejala 5 --</option>
+     </select>
 
-            <label>Pilih Gejala 2</label>
-            <select id="g2"></select>
-
-            <label>Pilih Gejala 3</label>
-            <select id="g3"></select>
-
-            <label>Pilih Gejala 4</label>
-            <select id="g4"></select>
-
-            <label>Pilih Gejala 5</label>
-            <select id="g5"></select>
-
-            <button onclick="diagnose()">Diagnosa Penyakit</button>
-
-            <h2 id="result"></h2>
-        </div>
-    </div>
-
-    <!-- ABOUT PAGE -->
-    <div id="about" class="section">
-        <h1>About</h1>
-        <div class="card">
-            Website SPK untuk diagnosis penyakit tanaman berbasis gejala.
-        </div>
-    </div>
+     <div class="result" id="hasil"></div>
+   </div>
+ </div>
 </div>
 
 <script>
-function showPage(id) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+const data = [
+ {
+  tumbuhan:'Jagung', penyakit:'Penyakit Bulai (Downy Mildew)',
+  g:['Daun muda berwarna kuning pucat sejak awal pertumbuhan.','Muncul garis-garis putih keperakan sejajar tulang daun.','Daun tampak belang kuning–putih secara tidak merata.','Daun menjadi kaku, tipis, dan mudah robek.','Tanaman gagal menghasilkan malai/tongkol, atau tongkol sangat kecil.']
+ },
+ {
+  tumbuhan:'Jagung', penyakit:'Karat Daun (Common Rust)',
+  g:['Muncul bintik-bintik kecil berwarna coklat kemerahan pada permukaan daun.','Bintik tersebut berbentuk bulat atau oval, ukurannya kecil dan terpisah-pisah.','Bintik berubah menjadi pustula (benjolan kecil) yang mengandung serbuk spora berwarna merah karat.','Daun berubah warna menjadi kuning di area sekitar bintik.','Bercak semakin banyak dan menyebar cepat ke seluruh permukaan daun.']
+ },
+ {
+  tumbuhan:'Jagung', penyakit:'Busuk Tongkol',
+  g:['Biji tampak keriput dan tidak terisi penuh karena infeksi jamur menghambat pengisian biji.','Tongkol mudah hancur saat ditekan, terasa lembek atau rapuh.','Biji mengering sebelum waktunya, tampak kusam dan tidak mengkilap.','Pertumbuhan jamur berbentuk kapas pada biji yang lembab.','Biji jagung berubah warna menjadi putih, merah muda, cokelat, atau kehijauan.']
+ },
+ {
+  tumbuhan:'Jagung', penyakit:'Hawar Daun (Leaf Blight)',
+  g:['Bercak kecil berbentuk oval berwarna coklat pada daun .','Daun yang terserang mengering dan rontok .','Tongkol jagung yang terserang tidak berisi penuh .','Daun jagung berwarna kecokelatan .','Serangan dimulai dari daun bawah dan meningkat ke atas .']
+ },
+ {
+  tumbuhan:'Jagung', penyakit:'Layu Stewart',
+  g:['Garis-garis kuning pucat memanjang sejajar tulang daun','Daun layu terutama pada cuaca panas','Garis kuning berubah menjadi cokelat dan mengering','Tanaman bibit dapat mati mendadak','Lendir bakteri keluar dari jaringan']
+ },
+ {
+  tumbuhan:'Cengkeh', penyakit:'Akar Putih',
+  g:['Daun menguning lalu perlahan rontok.','Pertumbuhan tanaman terhambat, tampak kerdil dan layu meski tanah cukup air.','Lapisan putih seperti kapas muncul pada permukaan akar.','Akar membusuk, berubah cokelat kehitaman.','Tanaman mudah rebah atau mati mendadak.']
+ },
+ {
+  tumbuhan:'Cengkeh', penyakit:'Busuk Akar (Phytophthora)',
+  g:['Daun menguning lalu rontok secara bertahap.','Pertumbuhan tanaman terhambat dan tampak layu meski tanah lembap.','Akar berubah cokelat kehitaman dan mudah patah.','Kulit batang dekat tanah membusuk dan bau tidak sedap.','Tanaman akhirnya mati mendadak.']
+ },
+ {
+  tumbuhan:'Cengkeh', penyakit:'Dieback / Mati Pucuk',
+  g:['Ujung ranting atau pucuk mengering.','Daun di bagian pucuk layu lalu rontok.','Batang mengalami perubahan warna menjadi hitam.','Pertumbuhan tunas baru terhambat.','Luka kecil membesar dan menyebar.']
+ },
+ {
+  tumbuhan:'Cengkeh', penyakit:'Embun Jelaga',
+  g:['Permukaan daun tertutup lapisan hitam seperti jelaga.','Fotosintesis menurun sehingga daun tampak kusam.','Daun menjadi lengket karena honeydew.','Pertumbuhan tanaman melambat.','Daun menguning dan jatuh jika parah.']
+ },
+ {
+  tumbuhan:'Cengkeh', penyakit:'Cacar Daun Cengkeh',
+  g:['Bercak tembus cahaya','Permukaan daun cembung dan cekung','Daun muda salah bentuk','Daun tua tidak berubah bentuk','Bercak coklat pada daun']
+ }
+];
+
+const g1 = document.getElementById("g1");
+const g2 = document.getElementById("g2");
+const g3 = document.getElementById("g3");
+const g4 = document.getElementById("g4");
+const g5 = document.getElementById("g5");
+
+function resetSelect(level) {
+ if (level <= 1) g1.innerHTML = '<option value="">-- Pilih Gejala 1 --</option>';
+ if (level <= 2) g2.innerHTML = '<option value="">-- Pilih Gejala 2 --</option>';
+ if (level <= 3) g3.innerHTML = '<option value="">-- Pilih Gejala 3 --</option>';
+ if (level <= 4) g4.innerHTML = '<option value="">-- Pilih Gejala 4 --</option>';
+ if (level <= 5) g5.innerHTML = '<option value="">-- Pilih Gejala 5 --</option>';
+ document.getElementById('hasil').innerHTML = '';
 }
+
+function initG1() {
+ const all = [...new Set(data.map(d => d.g[0]))];
+ all.forEach(g => { g1.innerHTML += `<option value="${g}">${g}</option>`; });
+}
+
+function updateGejala(step) {
+ resetSelect(step + 1);
+ let f = data;
+ if (g1.value) f = f.filter(d => d.g[0] === g1.value);
+ if (g2.value) f = f.filter(d => d.g[1] === g2.value);
+ if (g3.value) f = f.filter(d => d.g[2] === g3.value);
+ if (g4.value) f = f.filter(d => d.g[3] === g4.value);
+ if (g5.value) f = f.filter(d => d.g[4] === g5.value);
+ let next = [g1,g2,g3,g4,g5][step];
+ if (!next) return;
+ let idx = step;
+ const opts = [...new Set(f.map(d => d.g[idx]))];
+ opts.forEach(o => {
+   if (o) next.innerHTML += `<option value="${o}">${o}</option>`;
+ });
+ if (f.length === 1 && g5.value)
+   document.getElementById('hasil').innerHTML = 'Hasil Diagnosis: <br><b>' + f[0].penyakit + '</b>';
+}
+
+function showPage(id) {
+ document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+
+initG1();
 </script>
 
 </body>
