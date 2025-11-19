@@ -1,115 +1,214 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>SPK Diagnosa Penyakit Tanaman</title>
 <style>
- body{margin:0;font-family:'Times New Roman',serif;line-height:1.5;display:flex;background:#f3e9fa;}
- .sidebar{width:260px;background:#cbb3e6;height:100vh;position:fixed;padding:20px;box-sizing:border-box;}
- .sidebar a{display:block;margin:15px 0;color:#4b2e83;text-decoration:none;font-size:22px;font-weight:bold;}
- .content{margin-left:280px;padding:30px;width:100%;}
- h1{font-size:40px;text-align:center;color:#4b2e83;}
- h2{font-size:30px;text-align:center;color:#4b2e83;}
- .center{font-size:24px;text-align:center;}
- select{width:80%;padding:10px;margin:10px;font-size:18px;}
- .hasil{font-size:26px;color:#4b2e83;font-weight:bold;margin-top:20px;text-align:center;}
+  :root{--purple-1:#efe8fb;--purple-2:#d8c6f0;--accent:#6b3fa0;--muted:#7a6a85}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:'Times New Roman',serif;line-height:1.5;background:linear-gradient(180deg,var(--purple-1),#fbf7ff)}
+  /* sidebar */
+  .site{display:flex;min-height:100vh}
+  .sidebar{width:300px;background:linear-gradient(180deg,var(--purple-2),#e9dbf8);padding:28px;position:fixed;left:0;top:0;bottom:0;border-right:1px solid rgba(107,63,160,0.08)}
+  .logo{font-size:22px;color:var(--accent);text-align:center;margin-bottom:18px}
+  nav a{display:block;text-decoration:none;color:var(--accent);font-weight:700;padding:10px 6px;border-radius:10px;margin:8px 0}
+  nav a:hover{background:rgba(107,63,160,0.06)}
+  /* mobile */
+  .mobile-toggle{display:none}
+  /* main */
+  main{flex:1;margin-left:320px;padding:28px}
+  header{display:flex;align-items:center;justify-content:space-between}
+  h1{font-size:40px;text-align:center;color:var(--accent);margin:12px 0}
+  .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 6px 18px rgba(106,76,140,0.08);margin:14px 0}
+  .center{font-size:24px;text-align:center;color:var(--muted)}
+  .flower-row{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:10px}
+  .flower-row img{width:92px;height:92px;object-fit:cover;border-radius:12px;opacity:0.95}
+  /* diagnosa */
+  .selectors{display:grid;grid-template-columns:repeat(1,1fr);gap:10px;align-items:center}
+  select{width:100%;padding:12px;border-radius:8px;border:1px solid #e1d7f2;font-size:16px}
+  .actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+  button{padding:10px 14px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
+  button.secondary{background:transparent;color:var(--accent);border:1px solid rgba(107,63,160,0.12)}
+  .result-list{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .result-item{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(90deg,#fff,#fbf9ff);border:1px solid rgba(107,63,160,0.04)}
+  .disease-detail{margin-top:12px;background:#fff;padding:12px;border-radius:8px}
+  /* data table */
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:10px;border-bottom:1px solid #f0e8fb;text-align:left}
+  th{background:linear-gradient(90deg,#f6f0fb,#f3e9fa);color:var(--accent)}
+  /* responsive */
+  @media(max-width:900px){
+    .sidebar{position:relative;width:100%;height:auto;padding:12px;display:none}
+    .mobile-toggle{display:block;background:transparent;border:0;color:var(--accent);font-weight:800}
+    main{margin-left:0;padding:14px}
+  }
 </style>
 </head>
 <body>
-<div class="sidebar">
- <a href="#home">Home</a>
- <a href="#info">Info</a>
- <a href="#diagnosa">Diagnosa</a>
- <a href="#data">Data Penyakit</a>
-</div>
-<div class="content">
-<section id="home">
- <h1>WELCOME TO OUR WEBSITE</h1>
- <p class="center">
- UNIVERSITAS SAM RATULANGI MANADO<br>
- FAKULTAS PERTANIAN<br>
- PRODI AGROTEKNOLOGI<br>
- ANGKATAN 2025<br>
- Tugas Mata Kuliah Teknologi Informasi<br>
- Create By Kelompok 1
- </p>
-</section>
+<div class="site">
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">SPK Diagnosa - Kelompok 1</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#info">Info</a>
+      <a href="#diagnosa">Diagnosa</a>
+      <a href="#data">Data Penyakit</a>
+    </nav>
+    <div style="position:absolute;bottom:18px;left:18px;right:18px;text-align:center;color:rgba(75,46,131,0.8);font-size:13px">Theme: soft purple • Floral accents</div>
+  </aside>
 
-<section id="info">
- <h2>Info</h2>
- <p class="center">
- Nama Mahasiswa<br>
- Ashley Kamasi 250311080004<br>
- Al Zahra Trianoviyanti 250311080001<br>
- Helena Lumentut 250311080002<br>
- Pricilia Pongoh 250311080003<br>
- Chelsea Mokodompis 250311080005
- </p>
-</section>
+  <main>
+    <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+      <div>
+        <button class="mobile-toggle" id="menuBtn">☰ Menu</button>
+      </div>
+      <div style="flex:1"></div>
+      <div style="text-align:right">
+        <button onclick="window.print()">Cetak / Save as PDF</button>
+      </div>
+    </div>
 
-<section id="diagnosa">
- <h2>Diagnosa Penyakit Tanaman</h2>
- <p>Pilih gejala secara berurutan:</p>
- <select id="g1"></select>
- <select id="g2"></select>
- <select id="g3"></select>
- <select id="g4"></select>
- <select id="g5"></select>
- <div id="hasil" class="hasil"></div>
-</section>
+    <section id="home" class="card">
+      <h1>WELCOME TO OUR WEBSITE</h1>
+      <p class="center">UNIVERSITAS SAM RATULANGI MANADO<br>FAKULTAS PERTANIAN<br>PRODI AGROTEKNOLOGI<br>ANGKATAN 2025<br>Tugas Mata Kuliah Teknologi Informasi<br>Create By Kelompok 1</p>
+      
+    </section>
 
-<section id="data">
- <h2>Data Penyakit Tanaman</h2>
- <p>Berisi seluruh daftar penyakit dan gejala dari tanaman Jagung dan Cengkeh.</p>
-</section>
+    <section id="info" style="display:none" class="card">
+      <h2 style="text-align:center;color:var(--accent)">Info</h2>
+      <p class="center">Nama Mahasiswa<br>Ashley Kamasi 250311080004<br>Al Zahra Trianoviyanti 250311080001<br>Helena Lumentut 250311080002<br>Pricilia Pongoh 250311080003<br>Chelsea Mokodompis 250311080005</p>
+    </section>
+
+    <section id="diagnosa" style="display:none" class="card">
+      <h2 style="text-align:center;color:var(--accent)">Diagnosa Penyakit Tanaman</h2>
+      <p style="text-align:center;color:var(--muted)">Pilih gejala satu per satu. Sistem akan menyaring pilihan berikutnya agar sesuai (tanpa redundansi).</p>
+
+      <div class="selectors">
+        <select id="g1"><option value="">-- Pilih Gejala 1 --</option></select>
+        <select id="g2" disabled><option value="">-- Pilih Gejala 2 --</option></select>
+        <select id="g3" disabled><option value="">-- Pilih Gejala 3 --</option></select>
+        <select id="g4" disabled><option value="">-- Pilih Gejala 4 --</option></select>
+        <select id="g5" disabled><option value="">-- Pilih Gejala 5 --</option></select>
+      </div>
+
+      <div class="actions">
+        <button id="diagnoseBtn">Diagnosa</button>
+        <button class="secondary" id="resetBtn">Reset Pilihan</button>
+      </div>
+
+      <div id="results" class="result-list" aria-live="polite"></div>
+      <div id="detail" class="disease-detail" style="display:none"></div>
+    </section>
+
+    <section id="data" style="display:none" class="card">
+      <h2 style="text-align:center;color:var(--accent)">Data Penyakit (Jagung & Cengkeh)</h2>
+      <div style="overflow:auto;max-height:420px">
+        <table id="tableData">
+          <thead><tr><th>No</th><th>Tumbuhan</th><th>Nama Penyakit</th><th>G1</th><th>G2</th><th>G3</th><th>G4</th><th>G5</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
 </div>
 
 <script>
-const data=[
- {penyakit:"Penyakit Bulai (Downy Mildew)",gejala:["Daun muda berwarna kuning pucat sejak awal pertumbuhan.","Muncul garis-garis putih keperakan sejajar tulang daun.","Daun tampak belang kuning–putih secara tidak merata.","Daun menjadi kaku, tipis, dan mudah robek.","Tanaman gagal menghasilkan malai/tongkol, atau tongkol sangat kecil."]},
- {penyakit:"Karat Daun (Common Rust)",gejala:["Muncul bintik-bintik kecil berwarna coklat kemerahan pada permukaan daun.","Bintik berbentuk bulat/oval kecil dan terpisah-pisah.","Bintik berubah menjadi pustula berisi serbuk spora.","Daun berubah warna menjadi kuning di area sekitar bintik.","Bercak menyebar cepat ke seluruh daun."]},
- {penyakit:"Busuk Tongkol (Ear Rot)",gejala:["Biji tampak keriput dan tidak terisi penuh.","Tongkol mudah hancur saat ditekan.","Biji mengering sebelum waktunya dan tampak kusam.","Jamur berbentuk kapas muncul pada biji.","Biji berubah warna menjadi putih/merah muda/cokelat/hijau."]},
- {penyakit:"Penyakit Hawar Daun (Leaf Blight)",gejala:["Bercak kecil oval coklat pada daun.","Daun yang terserang mengering dan rontok.","Tongkol tidak berisi penuh.","Daun berwarna kecokelatan.","Serangan dimulai dari daun bawah dan naik ke atas."]},
- {penyakit:"Layu Stewart (Stewart's Wilt)",gejala:["Garis-garis kuning pucat sejajar tulang daun.","Daun layu terutama pada cuaca panas.","Garis kuning berubah menjadi cokelat dan mengering.","Bibit dapat mati mendadak.","Lendir bakteri keluar dari jaringan terinfeksi."]},
- {penyakit:"Akar Putih (White Root Fungus)",gejala:["Daun menguning lalu rontok.","Tanaman tampak kerdil dan layu.","Lapisan putih seperti kapas pada akar.","Akar membusuk dan rapuh.","Tanaman rebah atau mati mendadak."]},
- {penyakit:"Penyakit Busuk Akar (Phytophthora sp.)",gejala:["Daun menguning lalu rontok bertahap.","Tanaman layu meski tanah lembap.","Akar cokelat kehitaman dan mudah patah.","Kulit batang dekat tanah membusuk.","Tanaman mati mendadak."]},
- {penyakit:"Penyakit Dieback / Mati Pucuk",gejala:["Ujung ranting mengering dan cokelat.","Daun bagian pucuk layu dan rontok.","Batang menghitam atau cokelat gelap.","Tunas baru tidak muncul.","Luka kecil membesar dan menyebar."]},
- {penyakit:"Penyakit Embun Jelaga (Sooty Mold)",gejala:["Daun tertutup jelaga hitam.","Fotosintesis menurun, daun kusam.","Daun lengket karena honeydew.","Pertumbuhan tanaman melambat.","Daun menguning dan jatuh."]},
- {penyakit:"Penyakit Cacar Daun Cengkeh (CDC)",gejala:["Bercak tembus cahaya.","Daun cembung dan cekung.","Daun muda salah bentuk.","Daun tua tidak berubah bentuk.","Bercak coklat pada permukaan daun."]}
+// dataset lengkap sesuai input user (10 record)
+const dataset = [
+  {no:1,tumbuhan:'Jagung',penyakit:'Penyakit Bulai (Downy Mildew)',g:['Daun muda berwarna kuning pucat sejak awal pertumbuhan.','Muncul garis-garis putih keperakan sejajar tulang daun.','Daun tampak belang kuning–putih secara tidak merata.','Daun menjadi kaku, tipis, dan mudah robek.','Tanaman gagal menghasilkan malai/tongkol, atau tongkol sangat kecil.'],desc:'Infeksi jamur oomicete yang menyebabkan bercak putih dan kegagalan pembentukan malai.'},
+  {no:2,tumbuhan:'Jagung',penyakit:'Karat Daun (Common Rust)',g:['Muncul bintik-bintik kecil berwarna coklat kemerahan pada permukaan daun.','Bintik tersebut berbentuk bulat atau oval, ukurannya kecil dan terpisah-pisah.','Bintik berubah menjadi pustula (benjolan kecil) yang mengandung serbuk spora berwarna merah karat.','Daun berubah warna menjadi kuning di area sekitar bintik.','Bercak semakin banyak dan menyebar cepat ke seluruh permukaan daun.'],desc:'Penyakit jamur yang menghasilkan pustula berwarna merah karat pada daun.'},
+  {no:3,tumbuhan:'Jagung',penyakit:'Busuk Tongkol (Ear Rot)',g:['Biji tampak keriput dan tidak terisi penuh karena infeksi jamur menghambat pengisian biji.','Tongkol mudah hancur saat ditekan, terasa lembek atau rapuh.','Biji mengering sebelum waktunya, tampak kusam dan tidak mengkilap.','Pertumbuhan jamur berbentuk kapas pada biji yang lembab.','Biji jagung berubah warna menjadi putih, merah muda, cokelat, atau kehijauan tergantung jenis jamur penyebab.'],desc:'Berbagai jenis jamur menyerang tongkol, menurunkan mutu dan isi biji.'},
+  {no:4,tumbuhan:'Jagung',penyakit:'Penyakit Hawar Daun (Leaf Blight)',g:['Bercak kecil berbentuk oval berwarna coklat pada daun .','Daun yang terserang mengering dan rontok .','Tongkol jagung yang terserang tidak berisi penuh .','Daun jagung berwarna kecokelatan .','Serangan penyakit ini dimulai dari daun yang paling bawah dan terus meningkat ke atas .'],desc:'Hawar daun menyebabkan bercak coklat yang meluas dan mengurangi hasil.'},
+  {no:5,tumbuhan:'Jagung',penyakit:"Layu Stewart (Stewart's Wilt)",g:['Garis-garis kuning pucat memanjang sejajar tulang daun','Daun layu terutama pada cuaca panas','Garis kuning berubah menjadi cokelat dan mengering','Tanaman bibit dapat mati mendadak (blight phase)','Lendir bakteri keluar dari jaringan yang terinfeksi'],desc:"Penyakit bakteri yang ditularkan oleh kutu dan dapat menyebabkan layu parah."},
+  {no:6,tumbuhan:'Cengkeh',penyakit:'Akar Putih (White Root Fungus)',g:['Daun menguning lalu perlahan rontok.','Pertumbuhan tanaman terhambat, tampak kerdil dan layu meski tanah cukup air.','Lapisan putih seperti kapas muncul pada permukaan akar yang terinfeksi.','Akar membusuk, berubah cokelat kehitaman dan rapuh.','Tanaman mudah rebah atau mati mendadak karena akar tidak berfungsi menyerap air dan nutrisi.'],desc:'Jamur tanah yang menyerang akar menyebabkan pembusukan dan gangguan penyerapan nutrisi.'},
+  {no:7,tumbuhan:'Cengkeh',penyakit:'Penyakit Busuk Akar (Phytophthora sp.)',g:['Daun menguning lalu rontok secara bertahap.','Pertumbuhan tanaman terhambat dan tampak layu meski tanah lembap.','Akar berubah cokelat kehitaman dan mudah patah.','Kulit batang dekat permukaan tanah membusuk dan mengeluarkan bau tidak sedap.','Tanaman akhirnya mati mendadak akibat akar tidak mampu menyerap air.'],desc:'Penyakit busuk akar yang disebabkan oleh Phytophthora, sering setelah genangan.'},
+  {no:8,tumbuhan:'Cengkeh',penyakit:'Penyakit Dieback / Mati Pucuk',g:['Ujung ranting atau pucuk mengering dan berwarna kecokelatan.','Daun di bagian pucuk terlihat layu lalu rontok.','Batang atau ranting mengalami perubahan warna menjadi hitam atau cokelat gelap.','Pertumbuhan tunas baru terhambat atau tidak muncul.','Luka kecil pada ranting menjadi membesar dan menyebar ke bagian lain.'],desc:'Serangkaian jamur atau patogen yang menyebabkan mati pucuk dan kematian bagian atas tanaman.'},
+  {no:9,tumbuhan:'Cengkeh',penyakit:'Penyakit Embun Jelaga (Sooty Mold)',g:['Permukaan daun tertutup lapisan hitam seperti jelaga.','Fotosintesis menurun sehingga daun tampak kusam.','Daun menjadi lengket karena cairan madu (honeydew) dari serangga penghisap.','Pertumbuhan tanaman melambat.','Jika parah, daun bisa menguning dan jatuh.'],desc:'Jelaga tumbuh pada madu serangga; kendalikan vektor (serangga) untuk mengurangi dampak.'},
+  {no:10,tumbuhan:'Cengkeh',penyakit:'Penyakit Cacar Daun Cengkeh (CDC)',g:['Bercak tembus cahaya','Permukaan daun cembung dan cekung','Daun muda salah bentuk','Daun tua tidak berubah bentuk','Bercak coklat pada permukaan daun'],desc:'Penyakit bercak pada daun cengkeh yang memengaruhi penampilan dan kesehatan daun.'}
 ];
 
-function isiDropdown(id,opsi){document.getElementById(id).innerHTML=opsi;}
+// populate table
+const tbody=document.querySelector('#tableData tbody');dataset.forEach(d=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${d.no}</td><td>${d.tumbuhan}</td><td>${d.penyakit}</td><td>${d.g[0]}</td><td>${d.g[1]}</td><td>${d.g[2]}</td><td>${d.g[3]}</td><td>${d.g[4]}</td>`;
+  tbody.appendChild(tr);
+});
 
-function init(){
- let g1=new Set();data.forEach(d=>g1.add(d.gejala[0]));
- let opsi="<option value=''>--Pilih Gejala 1--</option>";
- g1.forEach(g=>opsi+=`<option value='${g}'>${g}</option>`);
- isiDropdown('g1',opsi);
+// helper to get unique gejala by position
+function uniqueByIndex(idx, pool){const s=new Set();pool.forEach(d=>{if(d.g[idx])s.add(d.g[idx])});return Array.from(s);
 }
 
-function updateDropdown(level,value){
- let filtered=data.filter(d=>d.gejala[level-1]===value);
- for(let i=level;i<5;i++){document.getElementById('g'+(i+1)).innerHTML="";}
- if(level<5){
- let set=new Set();filtered.forEach(d=>set.add(d.gejala[level]));
- let opsi=`<option value=''>--Pilih Gejala ${level+1}--</option>`;
- set.forEach(g=>opsi+=`<option value='${g}'>${g}</option>`);
- isiDropdown('g'+(level+1),opsi);
- }
- if(level===5){
- let penyakit=filtered[0]?.penyakit||"Tidak ditemukan";
- document.getElementById('hasil').innerText="Hasil Diagnosa: "+penyakit;
- }
+// initialize g1 options from all first-gejala values
+function initSelectors(){const g1=uniqueByIndex(0,dataset);const sel1=document.getElementById('g1');sel1.innerHTML=`<option value=''>-- Pilih Gejala 1 --</option>`+g1.map(x=>`<option value="${x}">${x}</option>`).join('');}
+
+initSelectors();
+
+// dynamic filtering: when user chooses a gejala at level L, we filter dataset to ones matching that gejala at that level
+let selections=[null,null,null,null,null];
+function handleChange(level){
+  const val=document.getElementById('g'+level).value;
+  selections[level-1]=val||null;
+  // enable next selects and populate according to filtered dataset by previous selections
+  let filtered=dataset.filter(d=>{
+    for(let i=0;i<level;i++){
+      if(selections[i] && d.g[i]!==selections[i])return false;
+    }
+    return true;
+  });
+  // populate subsequent select (level+1) with possible options from filtered
+  for(let i=level;i<5;i++){
+    const sel=document.getElementById('g'+(i+1));
+    sel.innerHTML=`<option value=''>-- Pilih Gejala ${i+1} --</option>`;
+    sel.disabled=true;
+  }
+  if(level<5){
+    const opts=uniqueByIndex(level,filtered);
+    const selNext=document.getElementById('g'+(level+1));
+    if(opts.length>0){selNext.innerHTML=`<option value=''>-- Pilih Gejala ${level+1} --</option>`+opts.map(o=>`<option value="${o}">${o}</option>`).join('');selNext.disabled=false;}else{selNext.disabled=true}
+  }
 }
 
-document.getElementById('g1').addEventListener('change',e=>updateDropdown(1,e.target.value));
-document.getElementById('g2').addEventListener('change',e=>updateDropdown(2,e.target.value));
-document.getElementById('g3').addEventListener('change',e=>updateDropdown(3,e.target.value));
-document.getElementById('g4').addEventListener('change',e=>updateDropdown(4,e.target.value));
-document.getElementById('g5').addEventListener('change',e=>updateDropdown(5,e.target.value));
+// attach listeners
+for(let i=1;i<=5;i++){document.getElementById('g'+i).addEventListener('change',()=>handleChange(i))}
 
-init();
+// diagnose: compute matching score for each disease using selected gejala (non-null). Score = matched_count / total selected
+function diagnose(){
+  const picked=selections.filter(s=>s);
+  if(picked.length===0){alert('Pilih minimal 1 gejala untuk mendeteksi.');return}
+  const results=dataset.map(d=>{
+    let match=0;for(let i=0;i<5;i++){if(selections[i] && d.g[i]===selections[i])match++}
+    return {...d,score:Math.round((match/picked.length)*100)}
+  }).filter(r=>r.score>0).sort((a,b)=>b.score-a.score);
+  const resDiv=document.getElementById('results');resDiv.innerHTML='';
+  if(results.length===0){resDiv.innerHTML='<div class="result-item">Tidak ada penyakit yang cocok dengan kombinasi gejala ini.</div>';document.getElementById('detail').style.display='none';return}
+  results.forEach(r=>{
+    const el=document.createElement('div');el.className='result-item';el.innerHTML=`<div><strong>${r.penyakit}</strong><div style="font-size:13px;color:#6b5683">${r.tumbuhan}</div></div><div style="min-width:90px;text-align:right">${r.score}%</div>`;
+    el.onclick=()=>showDetail(r);
+    resDiv.appendChild(el);
+  });
+  // show top result detail
+  showDetail(results[0]);
+}
+
+function showDetail(r){const d=document.getElementById('detail');d.style.display='block';d.innerHTML=`<h3 style="margin:6px 0;color:var(--accent)">${r.penyakit}</h3><div><strong>Tumbuhan:</strong> ${r.tumbuhan}</div><div style="margin-top:8px"><strong>Deskripsi:</strong> ${r.desc}</div><div style="margin-top:8px"><strong>Gejala lengkap:</strong><ol>${r.g.map(x=>`<li>${x}</li>`).join('')}</ol></div><div style="margin-top:8px"><em>Skor kecocokan berdasarkan pilihan Anda ditampilkan pada daftar di atas (klik item untuk melihat detail).</em></div>`}
+
+document.getElementById('diagnoseBtn').addEventListener('click',diagnose);
+document.getElementById('resetBtn').addEventListener('click',()=>{selections=[null,null,null,null,null];for(let i=1;i<=5;i++){const s=document.getElementById('g'+i);s.selectedIndex=0;s.disabled=(i>1)};document.getElementById('results').innerHTML='';document.getElementById('detail').style.display='none';initSelectors();});
+
+// mobile menu toggle
+const menuBtn=document.getElementById('menuBtn');menuBtn.addEventListener('click',()=>{const sb=document.getElementById('sidebar');sb.style.display=sb.style.display==='block'?'none':'block'});
+// show section on nav click
+const links=document.querySelectorAll('.sidebar nav a');
+links.forEach(l=>{
+ l.addEventListener('click',e=>{
+   const id=l.getAttribute('href');
+   document.querySelectorAll('main section').forEach(s=>s.style.display='none');
+   const tgt=document.querySelector(id);
+   if(tgt) tgt.style.display='block';
+ });
+});
 </script>
 </body>
 </html>
