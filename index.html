@@ -59,6 +59,9 @@
   </aside>
 
   <main>
+    <section id="landing" class="card" style="display:block;text-align:center;">
+      <h1>WELCOME TO OUR WEBSITE</h1>
+    </section>
     <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
       <div>
         <button class="mobile-toggle" id="menuBtn">☰ Menu</button>
@@ -69,9 +72,10 @@
       </div>
     </div>
 
-    <section id="home" class="card">
-      <h1>WELCOME TO OUR WEBSITE</h1>
-      <p class="center">UNIVERSITAS SAM RATULANGI MANADO<br>FAKULTAS PERTANIAN<br>PRODI AGROTEKNOLOGI<br>ANGKATAN 2025<br>Tugas Mata Kuliah Teknologi Informasi<br>Create By Kelompok 1</p>
+    <section id="home" class="card" style="display:none">
+      <h1 style="font-size:32px;text-align:center;color:var(--accent);margin-bottom:10px">HOME</h1>
+      <p class="center">
+UNIVERSITAS SAM RATULANGI MANADO<br>FAKULTAS PERTANIAN<br>PRODI AGROTEKNOLOGI<br>ANGKATAN 2025<br>Tugas Mata Kuliah Teknologi Informasi<br>Create By Kelompok 1</p>
       
     </section>
 
@@ -204,7 +208,7 @@ const links=document.querySelectorAll('.sidebar nav a');
 links.forEach(l=>{
  l.addEventListener('click',e=>{
    const id=l.getAttribute('href');
-   document.querySelectorAll('main section').forEach(s=>s.style.display='none');
+   document.querySelectorAll('main section:not(#landing)').forEach(s=>s.style.display='none');
    const tgt=document.querySelector(id);
    if(tgt) tgt.style.display='block';
  });
