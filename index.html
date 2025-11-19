@@ -1,77 +1,165 @@
-<!doctype html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Peta Tanaman — Satu Halaman</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2XkGkG1w2Lkqgqv+VdM0sKp1Y9w4g1hJ6v9ZZ+M=" crossorigin=""/>
-  <style>
-    body, html { height:100%; margin:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
-    #map { height: 100vh; width:100%; }
-    .legend { background: white; padding: 8px 12px; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,0.2); }
-    .legend h4 { margin:0 0 6px 0; font-size:14px; }
-    .legend-row { display:flex; align-items:center; gap:8px; margin:4px 0; }
-    .swatch { width:16px; height:16px; border-radius:4px; }
-    .topright { position:absolute; right:12px; top:12px; z-index:1000; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SPK Diagnosis - Single Page App</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Times New Roman', serif;
+        background-color: #f7f1fa;
+        line-height: 1.5;
+        display: flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 260px;
+        background-color: #c9addb;
+        height: 100vh;
+        padding-top: 40px;
+        position: fixed;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    }
+    .sidebar a {
+        display: block;
+        padding: 18px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+    .sidebar a:hover {
+        background-color: #b38bc8;
+    }
+
+    /* CONTENT */
+    .content {
+        margin-left: 260px;
+        padding: 40px;
+        width: calc(100% - 260px);
+    }
+
+    h1 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .section {
+        display: none;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        font-size: 24px;
+        text-align: center;
+    }
+
+    select, button {
+        font-size: 20px;
+        padding: 10px;
+        margin-top: 15px;
+        width: 100%;
+    }
+</style>
 </head>
 <body>
-  <div id="map"></div>
-  <div class="topright legend" id="legend">
-    <h4>Legenda</h4>
-    <div class="legend-row"><div class="swatch" style="background:#e41a1c"></div><div>Tanaman 1</div></div>
-    <div class="legend-row"><div class="swatch" style="background:#377eb8"></div><div>Tanaman 2</div></div>
-    <div class="legend-row"><div class="swatch" style="background:#4daf4a"></div><div>Tanaman 3</div></div>
-    <div class="legend-row"><div class="swatch" style="background:#ff7f00"></div><div>Tanaman 4</div></div>
-    <div class="legend-row"><div class="swatch" style="background:#984ea3"></div><div>Tanaman 5</div></div>
-  </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kM3bWvGk3f6kQ1KQ4nYk0p2bP2f5f5p4R0TGw=" crossorigin=""></script>
-  <script>
-    // Data titik (lat, lon, label, color)
-    const plants = [
-      {lat:1.455510, lon:124.828843, name:'Tanaman 1', color:'#e41a1c'},
-      {lat:1.455724, lon:124.828812, name:'Tanaman 2', color:'#377eb8'},
-      {lat:1.455621, lon:124.828670, name:'Tanaman 3', color:'#4daf4a'},
-      {lat:1.455288, lon:124.828405, name:'Tanaman 4', color:'#ff7f00'},
-      {lat:1.455763, lon:124.828547, name:'Tanaman 5', color:'#984ea3'}
-    ];
+<div class="sidebar">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('info')">Info</a>
+    <a onclick="showPage('spk')">SPK</a>
+    <a onclick="showPage('about')">About</a>
+</div>
 
-    // Hitung pusat peta (rata-rata)
-    const avgLat = plants.reduce((s,p)=>s+p.lat,0)/plants.length;
-    const avgLon = plants.reduce((s,p)=>s+p.lon,0)/plants.length;
+<div class="content">
 
-    const map = L.map('map').setView([avgLat, avgLon], 19);
+    <!-- HOME PAGE -->
+    <div id="home" class="section active">
+        <h1>WELCOME TO OUR WEBSITE</h1>
+        <div class="card">
+            UNIVERSITAS SAM RATULANGI MANADO<br>
+            FAKULTAS PERTANIAN<br>
+            PRODI AGROTEKNOLOGI<br>
+            ANGKATAN 2025<br><br>
+            Tugas Mata Kuliah Teknologi Informasi<br>
+            Create By Kelompok 1
+        </div>
+    </div>
 
-    // OpenStreetMap tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 22,
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    <!-- INFO PAGE -->
+    <div id="info" class="section">
+        <h1>INFO</h1>
+        <div class="card">
+            Ashley Kamasi 250311080004 <br>
+            Al Zahra Trianoviyanti 250311080001 <br>
+            Helena Lumentut 250311080002 <br>
+            Pricilia Pongoh 250311080003 <br>
+            Chelsea Mokodompis 250311080005
+        </div>
+    </div>
 
-    // Tambah marker berbentuk circle dengan warna sesuai tanaman
-    plants.forEach(p => {
-      const circle = L.circleMarker([p.lat, p.lon], {
-        radius: 8,
-        fillColor: p.color,
-        color: '#000000',
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.9
-      }).addTo(map);
+    <!-- SPK PAGE -->
+    <div id="spk" class="section">
+        <h1>Sistem Penunjang Keputusan Diagnosis Penyakit</h1>
+        <div class="card">
+            <label>Pilih Gejala 1</label>
+            <select id="g1" onchange="filterG2()">
+                <option value="">-- pilih --</option>
+                <option value="1">Daun muda berwarna kuning pucat sejak awal pertumbuhan.</option>
+                <option value="2">Muncul bintik-bintik kecil berwarna coklat kemerahan pada permukaan daun.</option>
+                <option value="3">Biji tampak keriput dan tidak terisi penuh.</option>
+                <option value="4">Bercak kecil berbentuk oval berwarna coklat pada daun.</option>
+                <option value="5">Garis-garis kuning pucat memanjang sejajar tulang daun</option>
+                <option value="6">Daun menguning lalu perlahan rontok.</option>
+                <option value="7">Daun menguning lalu rontok secara bertahap.</option>
+                <option value="8">Ujung ranting atau pucuk mengering dan berwarna kecokelatan.</option>
+                <option value="9">Permukaan daun tertutup lapisan hitam seperti jelaga.</option>
+                <option value="10">Bercak tembus cahaya</option>
+            </select>
 
-      circle.bindPopup(`<b>${p.name}</b><br/>Lat: ${p.lat}<br/>Lon: ${p.lon}`);
-    });
+            <label>Pilih Gejala 2</label>
+            <select id="g2"></select>
 
-    // Fit bounds sedikit buffer
-    const bounds = L.latLngBounds(plants.map(p=>[p.lat,p.lon]));
-    map.fitBounds(bounds.pad(0.3));
+            <label>Pilih Gejala 3</label>
+            <select id="g3"></select>
 
-    // Klik peta untuk menampilkan koordinat (berguna saat verifikasi)
-    map.on('click', function(e){
-      const c = e.latlng;
-      L.popup().setLatLng(c).setContent(`Koordinat: ${c.lat.toFixed(6)}, ${c.lng.toFixed(6)}`).openOn(map);
-    });
-  </script>
+            <label>Pilih Gejala 4</label>
+            <select id="g4"></select>
+
+            <label>Pilih Gejala 5</label>
+            <select id="g5"></select>
+
+            <button onclick="diagnose()">Diagnosa Penyakit</button>
+
+            <h2 id="result"></h2>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="section">
+        <h1>About</h1>
+        <div class="card">
+            Website SPK untuk diagnosis penyakit tanaman berbasis gejala.
+        </div>
+    </div>
+</div>
+
+<script>
+function showPage(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+</script>
+
 </body>
 </html>
